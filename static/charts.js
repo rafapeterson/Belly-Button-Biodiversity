@@ -73,10 +73,11 @@ function buildCharts(sample) {
 
 
     // 3. Create a variable that holds the washing frequency.
-    var metadata = result.metadata;
-    var wash = result.wfreq;
-    
-    console.log(wash)
+    var metadata = data.metadata;
+    var targetObject = metadata.filter(sampleObject =>
+      sampleObject.id == sample)[0];
+    console.log(targetObject);
+    var wash = targetObject.wfreq;
 
     // 7. Create the yticks for the bar chart.
     // Hint: Get the top 10 otu_ids and map them in descending order  
@@ -120,7 +121,7 @@ function buildCharts(sample) {
     // 2. Create the layout for the bubble chart.
     var bubbleLayout = {
       title: "Bacteria Cultures Per Sample",
-      margin: { t: 0 },
+      margin: { t: 100 },
       xaxis: { title: "OTU ID" },
       hovermode: 'closest',
     };
@@ -132,14 +133,14 @@ function buildCharts(sample) {
     var gaugeData = [
       {
 
-        title: { text: "Hand Washing Frequency" },
+        title: { text: "Scrubs per Week" },
         type: "indicator",
         mode: "gauge+number",
         value: wash,
 
         gauge: {
           axis: { range: [0, 10], tickwidth: 1, tickcolor: "darkblue" },
-          bar: { color: "black" },
+          bar: { color: "#FFFFFF", bordercolor: "black", borderwidth: "" },
           borderwidth: 1,
           bordercolor: "black",
 
@@ -157,7 +158,7 @@ function buildCharts(sample) {
 
     // 5. Create the layout for the gauge chart.
     var gaugeLayout = {
-
+      title: "Hand Washing Frequency",
       margin: { t: 25, r: 25, l: 25, b: 25 }
     };
 
